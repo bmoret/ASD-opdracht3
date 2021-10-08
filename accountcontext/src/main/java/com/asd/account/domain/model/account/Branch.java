@@ -1,4 +1,4 @@
-package java.com.asd.account.domain.model;
+package java.com.asd.account.domain.model.account;
 
 public enum Branch {
     VIANEN,

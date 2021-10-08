@@ -1,8 +1,9 @@
 package java.com.asd.reservation.domain.model.space;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class SpaceId {
+public class SpaceId implements Serializable {
     private final UUID id;
 
     public SpaceId(UUID id) {

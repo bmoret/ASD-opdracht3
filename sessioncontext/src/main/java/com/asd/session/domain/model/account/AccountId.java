@@ -1,4 +1,16 @@
 package main.java.com.asd.session.domain.model.account;
 
-public class AccountId {
+import java.io.Serializable;
+import java.util.UUID;
+
+public class AccountId implements Serializable {
+    private final UUID id;
+
+    public AccountId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getId() {
+        return id;
+    }
 }

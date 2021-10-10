@@ -1,9 +1,8 @@
 package java.com.asd.reservation.domain.model.reservation;
 
-import main.java.com.asd.session.domain.model.session.TimeSpan;
-
 import java.com.asd.reservation.domain.model.account.AccountId;
 import java.com.asd.reservation.domain.model.space.SpaceId;
+import java.util.List;
 
 public class Reservation {
     private ReservationId reservationId;
@@ -18,5 +17,30 @@ public class Reservation {
         this.timeSpan = timeSpan;
         this.spaceId = spaceId;
         this.accountId = accountId;
+    }
+
+    public Boolean changeDateTime(TimeSpan timeSpan, List<Reservation> reservations) {
+        if (timeSpan.equals(this.timeSpan)) return true;
+        for (Reservation reservation : reservations) {
+            if (reservation.getReservationId().equals(this.reservationId)) continue;
+            TimeSpan otherTimeSpan = reservation.getTimeSpan();
+            if (!timeSpan.getBegin().isAfter(otherTimeSpan.getEnd()) && !timeSpan.getEnd().isBefore(otherTimeSpan.getBegin())) {
+                return false;
+            }
+        }
+        this.timeSpan = timeSpan;
+        return true;
+    }
+
+    public ReservationId getReservationId() {
+        return this.reservationId;
+    }
+
+    public TimeSpan getTimeSpan() {
+        return this.timeSpan;
+    }
+
+    public SpaceId getSpaceId() {
+        return this.spaceId;
     }
 }

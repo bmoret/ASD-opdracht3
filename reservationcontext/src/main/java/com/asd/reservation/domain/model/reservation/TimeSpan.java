@@ -12,6 +12,13 @@ public class TimeSpan {
         this.end = end;
     }
 
+    public Boolean hasOverlap(TimeSpan otherTimeSpan) {
+        if (!this.getBegin().isAfter(otherTimeSpan.getEnd()) && !this.getEnd().isBefore(otherTimeSpan.getBegin())) {
+            return true;
+        }
+        return false;
+    }
+
     public LocalDateTime getBegin() {
         return begin;
     }

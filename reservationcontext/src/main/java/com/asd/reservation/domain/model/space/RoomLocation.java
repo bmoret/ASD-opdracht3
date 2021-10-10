@@ -1,4 +1,4 @@
-package java.com.asd.reservation.domain.model.space;
+package main.java.com.asd.reservation.domain.model.space;
 
 public class RoomLocation {
     private final String roomNumber;

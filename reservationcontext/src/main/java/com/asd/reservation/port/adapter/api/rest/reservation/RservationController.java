@@ -1,9 +1,7 @@
-package java.com.asd.reservation.port.adapter.api.rest.reservation;
-
+package main.java.com.asd.reservation.port.adapter.api.rest.reservation;
 import javassist.NotFoundException;
+import main.java.com.asd.reservation.application.reservation.ReservationService;
 import org.springframework.web.bind.annotation.*;
-
-import java.com.asd.reservation.application.reservation.ReservationService;
 import java.util.UUID;
 
 @RestController

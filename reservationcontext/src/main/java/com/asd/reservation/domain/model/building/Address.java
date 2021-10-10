@@ -1,4 +1,4 @@
-package java.com.asd.reservation.domain.model.building;
+package main.java.com.asd.reservation.domain.model.building;
 
 public class Address {
     private final String street;

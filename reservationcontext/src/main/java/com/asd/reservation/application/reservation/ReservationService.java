@@ -1,12 +1,11 @@
-package java.com.asd.reservation.application.reservation;
+package main.java.com.asd.reservation.application.reservation;
 
 import javassist.NotFoundException;
+import main.java.com.asd.reservation.domain.model.reservation.Reservation;
+import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
+import main.java.com.asd.reservation.domain.model.space.SpaceId;
+import main.java.com.asd.reservation.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
-
-import java.com.asd.reservation.domain.model.reservation.Reservation;
-import java.com.asd.reservation.domain.model.reservation.ReservationRepository;
-import java.com.asd.reservation.domain.model.reservation.TimeSpan;
-import java.com.asd.reservation.domain.model.space.SpaceId;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -35,5 +34,13 @@ public class ReservationService {
         Boolean changed = reservation.changeDateTime(new TimeSpan(LocalDateTime.parse(startDateTime), LocalDateTime.parse(endDateTime)), reservations);
         reservationRepository.save(reservation);
         return changed;
+    }
+
+    public List<Reservation> allReservations() {
+        return reservationRepository.findAll();
+    }
+
+    public List<Reservation> findBySpace(SpaceId id) {
+        return allReservations().stream().filter(reservation -> reservation.getSpaceId() == id).toList();
     }
 }

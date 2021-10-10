@@ -1,5 +1,7 @@
 package java.com.asd.reservation.domain.model.reservation;
 
+import main.java.com.asd.reservation.domain.model.reservation.Reservation;
+import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

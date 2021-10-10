@@ -1,7 +1,9 @@
-package java.com.asd.reservation.domain.model.reservation;
+package main.java.com.asd.reservation.domain.model.reservation;
 
-import java.com.asd.reservation.domain.model.account.AccountId;
-import java.com.asd.reservation.domain.model.space.SpaceId;
+import main.java.com.asd.reservation.domain.model.account.AccountId;
+import main.java.com.asd.reservation.domain.model.space.SpaceId;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Reservation {
@@ -43,5 +45,9 @@ public class Reservation {
 
     public SpaceId getSpaceId() {
         return this.spaceId;
+    }
+
+    public boolean timeSpanHasOverlap(TimeSpan otherTimeSpan) {
+        return timeSpan.hasOverlap(otherTimeSpan);
     }
 }

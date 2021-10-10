@@ -1,4 +1,4 @@
-package java.com.asd.reservation.domain.model.account;
+package main.java.com.asd.reservation.domain.model.account;
 
 import java.io.Serializable;
 import java.util.UUID;

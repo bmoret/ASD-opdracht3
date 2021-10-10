@@ -1,4 +1,4 @@
-package java.com.asd.reservation.domain.model.space;
+package main.java.com.asd.reservation.domain.model.space;
 
 public class Size {
     private final float length;

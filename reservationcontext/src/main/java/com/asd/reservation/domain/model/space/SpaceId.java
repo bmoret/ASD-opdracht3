@@ -1,16 +1,14 @@
-package java.com.asd.reservation.domain.model.space;
+package main.java.com.asd.reservation.domain.model.space;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.UUID;
 
 public class SpaceId implements Serializable {
-    private final UUID id;
-
-    public SpaceId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getId() {
-        return id;
-    }
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public UUID id;
 }

@@ -1,30 +1,18 @@
-package java.com.asd.reservation.domain.model.building;
+package main.java.com.asd.reservation.domain.model.building;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
 public class BuildingId implements Serializable {
-    private final UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public UUID id;
 
-    public BuildingId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BuildingId that = (BuildingId) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public BuildingId() {
+        this.id = UUID.randomUUID();
     }
 }

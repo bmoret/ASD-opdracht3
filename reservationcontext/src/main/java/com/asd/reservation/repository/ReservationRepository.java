@@ -1,9 +1,9 @@
-package java.com.asd.reservation.domain.model.reservation;
-
+package main.java.com.asd.reservation.repository;
+import main.java.com.asd.reservation.domain.model.reservation.Reservation;
+import main.java.com.asd.reservation.domain.model.space.SpaceId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.com.asd.reservation.domain.model.space.SpaceId;
 import java.util.List;
 import java.util.UUID;
 

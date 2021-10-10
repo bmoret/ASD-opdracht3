@@ -20,13 +20,14 @@ public class Reservation {
     }
 
     public Boolean changeDateTime(TimeSpan timeSpan, List<Reservation> reservations) {
+        if (timeSpan.getBegin().isAfter(timeSpan.getEnd())) throw new IllegalArgumentException("End time is before start time");
         if (timeSpan.equals(this.timeSpan)) return true;
+
         for (Reservation reservation : reservations) {
             if (reservation.getReservationId().equals(this.reservationId)) continue;
+
             TimeSpan otherTimeSpan = reservation.getTimeSpan();
-            if (!timeSpan.getBegin().isAfter(otherTimeSpan.getEnd()) && !timeSpan.getEnd().isBefore(otherTimeSpan.getBegin())) {
-                return false;
-            }
+            if (timeSpan.hasOverlap(otherTimeSpan)) return false;
         }
         this.timeSpan = timeSpan;
         return true;

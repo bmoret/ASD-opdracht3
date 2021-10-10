@@ -24,19 +24,16 @@ public class ReservationService {
                 .orElseThrow(() -> new NotFoundException("There is no Reservation with id: "+id));
     }
 
-    public List<Reservation> getReservationBySpace(SpaceId spaceId) {
+    public List<Reservation> getReservationsBySpace(SpaceId spaceId) {
         return reservationRepository.findBySpace(spaceId);
     }
 
     public Boolean changeReservationDateTime(UUID id, String startDateTime, String endDateTime) throws NotFoundException {
         Reservation reservation = getReservationById(id);
-        List<Reservation> reservations = getReservationBySpace(reservation.getSpaceId());
+        List<Reservation> reservations = getReservationsBySpace(reservation.getSpaceId());
 
-        LocalDateTime start = LocalDateTime.parse(startDateTime);
-        LocalDateTime end = LocalDateTime.parse(endDateTime);
-        if (start.isAfter(end)) throw new IllegalArgumentException("End time is before start time");
-
-        reservation.changeDateTime(new TimeSpan(start, end), reservations);
-        return false;
+        Boolean changed = reservation.changeDateTime(new TimeSpan(LocalDateTime.parse(startDateTime), LocalDateTime.parse(endDateTime)), reservations);
+        reservationRepository.save(reservation);
+        return changed;
     }
 }

@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-public class RservationController {
+public class ReservationController {
     private final ReservationService reservationService;
 
-    public RservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
 

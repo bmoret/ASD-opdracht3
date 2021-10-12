@@ -1,21 +1,23 @@
+import main.java.com.asd.reservation.domain.model.building.BuildingId;
+import main.java.com.asd.reservation.domain.model.reservation.ReservationStatus;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
-import main.java.com.asd.reservation.application.space.SpaceService;
 import main.java.com.asd.reservation.domain.model.building.Address;
 import main.java.com.asd.reservation.domain.model.building.Building;
-import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
 import main.java.com.asd.reservation.domain.model.space.PersonCapacity;
 import main.java.com.asd.reservation.domain.model.space.RoomLocation;
 import main.java.com.asd.reservation.domain.model.space.Size;
 import main.java.com.asd.reservation.domain.model.space.Space;
-import main.java.com.asd.reservation.repository.ReservationRepository;
-import main.java.com.asd.reservation.repository.SpaceRepository;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class ReservationApplicationTest {
-   private UUID buildingId;
+   private BuildingId buildingId;
    private UUID reservationId;
     @Before
     public void setUp(){
@@ -27,8 +29,8 @@ public class ReservationApplicationTest {
         Building building2 = new Building("Gebouw1", address);
         Building building3 = new Building("Gebouw1", address);
 
-        buildingId = building.getId();
-        Space space1 = new space(
+        buildingId = building1.getId();
+        Space space1 = new Space(
                 "New Space",
                 location,
                 size,
@@ -36,7 +38,7 @@ public class ReservationApplicationTest {
                 building1.getId(),
                 new ArrayList<>()
         );
-        Space space2 = new space(
+        Space space2 = new Space(
                 "New Space",
                 location,
                 size,
@@ -44,7 +46,7 @@ public class ReservationApplicationTest {
                 building2.getId(),
                 new ArrayList<>()
         );
-        Space space3 = new space(
+        Space space3 = new Space(
                 "New Space",
                 location,
                 size,
@@ -52,8 +54,8 @@ public class ReservationApplicationTest {
                 building3.getId(),
                 new ArrayList<>()
         );
-        reservationStatus reservationStatus = new ReservationSTatus();
-        TimeSpan timeSpan = new TimeSpan();
+        ReservationStatus reservationStatus = ReservationStatus.RESERVED;
+        TimeSpan timeSpan = new TimeSpan(LocalDateTime.now(), LocalDateTime.now());
         Reservation reservation1 = new Reservation(reservationStatus, timeSpan, space1, 1);
         Reservation reservation2 = new Reservation(reservationStatus, timeSpan, space2, 1);
         Reservation reservation3 = new Reservation(reservationStatus, timeSpan, space3, 1);

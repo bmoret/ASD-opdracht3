@@ -1,7 +1,10 @@
 package main.java.com.asd.reservation.application.reservation;
 
 import javassist.NotFoundException;
+import main.java.com.asd.reservation.domain.model.account.AccountId;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
+import main.java.com.asd.reservation.domain.model.reservation.ReservationId;
+import main.java.com.asd.reservation.domain.model.reservation.ReservationStatus;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
 import main.java.com.asd.reservation.domain.model.space.Space;
 import main.java.com.asd.reservation.domain.model.space.SpaceId;
@@ -58,5 +61,14 @@ public class ReservationService {
 
     public List<Reservation> findBySpace(SpaceId id) {
         return allReservations().stream().filter(reservation -> reservation.getSpace().getId() == id).collect(Collectors.toList());
+    }
+
+    public Reservation newReservation(TimeSpan timeSpan, Space testSpace, AccountId accountId) {
+        return new Reservation(new ReservationId(UUID.randomUUID()),
+                ReservationStatus.RESERVED,
+                new TimeSpan(LocalDateTime.now().minusDays(2), LocalDateTime.now().minusDays(1)),
+                testSpace,
+                accountId
+        );
     }
 }

@@ -43,8 +43,8 @@ public class Reservation {
         return this.timeSpan;
     }
 
-    public SpaceId getSpaceId() {
-        return this.spaceId;
+    public SpaceId getSpace() {
+        return this.space;
     }
 
     public boolean timeSpanHasOverlap(TimeSpan otherTimeSpan) {

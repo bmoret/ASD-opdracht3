@@ -11,6 +11,11 @@ public class TimeSpan {
         this.end = end;
     }
 
+    //checkt of de start tijd na de huidige tijd ligt
+    public boolean timeSpanBeginAfterNow() {
+        return this.begin.isAfter(LocalDateTime.now());
+    }
+
     public LocalDateTime getBegin() {
         return begin;
     }

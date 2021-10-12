@@ -18,4 +18,8 @@ public class Person {
         this.createdAt = createdAt;
         this.accountId = accountId;
     }
+
+    public PersonId getPersonId() {
+        return personId;
+    }
 }

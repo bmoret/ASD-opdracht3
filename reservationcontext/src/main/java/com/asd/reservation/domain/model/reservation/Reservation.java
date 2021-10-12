@@ -10,14 +10,14 @@ public class Reservation {
     private ReservationId reservationId;
     private ReservationStatus reservationStatus;
     private TimeSpan timeSpan;
-    private SpaceId spaceId;
+    private Space space;
     private AccountId accountId;
 
-    public Reservation(ReservationId reservationId, ReservationStatus reservationStatus, TimeSpan timeSpan, SpaceId spaceId, AccountId accountId) {
+    public Reservation(ReservationId reservationId, ReservationStatus reservationStatus, TimeSpan timeSpan, Space space, AccountId accountId) {
         this.reservationId = reservationId;
         this.reservationStatus = reservationStatus;
         this.timeSpan = timeSpan;
-        this.spaceId = spaceId;
+        this.space = space;
         this.accountId = accountId;
     }
 

@@ -1,4 +1,4 @@
-package java.com.asd.reservation.application.reservation;
+package test.java.com.asd.reservation.application.reservation;
 
 import javassist.NotFoundException;
 import main.java.com.asd.reservation.application.reservation.ReservationService;
@@ -7,11 +7,8 @@ import main.java.com.asd.reservation.domain.model.space.SpaceId;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
 import main.java.com.asd.reservation.domain.model.reservation.ReservationId;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
@@ -48,11 +45,11 @@ class ReservationServiceTest {
     void testFindsAllReservationsInSpace() {
         List<Reservation> reservationsSpace1 = reservationService.getReservationsBySpace(spaceId1);
         assertEquals(2,reservationsSpace1.size());
-        assertEquals(spaceId1,reservationsSpace1.get(0).getSpaceId());
-        assertEquals(spaceId1,reservationsSpace1.get(1).getSpaceId());
+        assertEquals(spaceId1,reservationsSpace1.get(0).getSpace().getId());
+        assertEquals(spaceId1,reservationsSpace1.get(1).getSpace().getId());
         List<Reservation> reservationsSpace2 = reservationService.getReservationsBySpace(spaceId2);
         assertEquals(1,reservationsSpace2.size());
-        assertEquals(spaceId2,reservationsSpace2.get(0).getSpaceId());
+        assertEquals(spaceId2,reservationsSpace2.get(0).getSpace().getId());
     }
 
     @Test

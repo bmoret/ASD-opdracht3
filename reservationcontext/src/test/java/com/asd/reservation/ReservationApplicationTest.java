@@ -83,16 +83,16 @@ public class ReservationApplicationTest {
 
     @Test
     public void testgetReservationByBuildingCorrectSize() throws NotFoundException {
-        Assert.assertEquals(reservationService.getReservationsByBuilding(building.getId()).size(), 1);
+        Assert.assertEquals(reservationService.getReservationsByBuilding(building.getId().id).size(), 1);
     }
 
     @Test
     public void testgetReservationByBuildingCorrectBuilding() throws NotFoundException {
-        Assert.assertNotEquals(reservationService.getReservationsByBuilding(building.getId()).get(0).getReservationId(), reservation.getReservationId());
+        Assert.assertNotEquals(reservationService.getReservationsByBuilding(building.getId().id).get(0).getReservationId(), reservation.getReservationId());
     }
 
     @Test
     public void testgetReservationByBuildingNotExist() throws NotFoundException {
-        Assert.assertTrue(reservationService.getReservationsByBuilding(wrongbuilding.getId()).isEmpty());
+        Assert.assertTrue(reservationService.getReservationsByBuilding(wrongbuilding.getId().id).isEmpty());
     }
 }

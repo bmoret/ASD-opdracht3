@@ -1,4 +1,4 @@
-package java.com.asd.reservation.domain.model.reservation;
+package test.java.com.asd.reservation.domain.model.reservation;
 
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class ReservationTest {
 

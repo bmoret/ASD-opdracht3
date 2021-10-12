@@ -7,17 +7,21 @@ import main.java.com.asd.reservation.repository.ReservationRepository;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
 import main.java.com.asd.reservation.domain.model.reservation.ReservationId;
-import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class ReservationServiceTest {
+public class ReservationServiceTest {
 
     final ReservationRepository reservationRepository = Mockito.mock(ReservationRepository.class);
     final ReservationService reservationService = new ReservationService(reservationRepository);
@@ -60,9 +64,7 @@ class ReservationServiceTest {
 
         try {
             assertTrue(reservationService.changeReservationDateTime(reservationId.getId(), timeSpan.getBegin().toString(), timeSpan.getEnd().toString()));
-
             Reservation reservation = reservationService.getReservationById(reservationId.getId());
-
             assertEquals(timeSpan, reservation.getTimeSpan());
         } catch (NotFoundException nfe) {
             fail();

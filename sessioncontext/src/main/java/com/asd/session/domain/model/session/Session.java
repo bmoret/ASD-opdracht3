@@ -2,6 +2,7 @@ package main.java.com.asd.session.domain.model.session;
 
 import main.java.com.asd.session.domain.model.person.PersonId;
 import main.java.com.asd.session.domain.model.reservation.ReservationId;
+import main.java.com.asd.session.domain.model.reservation.SpaceId;
 import main.java.com.asd.session.port.adapter.external.ExternalSystemHttpAdapter;
 
 import java.time.LocalDateTime;
@@ -33,7 +34,7 @@ public class Session {
         this.reservationId = reservationId;
     }
 
-    public void reserveSpace(UUID spaceId) {
+    public void reserveSpace(SpaceId spaceId) {
         UUID reservationUUID = ExternalSystemHttpAdapter.instance().makeReservation(spaceId, timeSpan.getBegin(), timeSpan.getEnd());
         this.reservationId = new ReservationId(reservationUUID);
     }

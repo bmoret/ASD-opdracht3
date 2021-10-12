@@ -1,59 +1,46 @@
 package main.java.com.asd.session.port.adapter.external;
 
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import main.java.com.asd.session.domain.model.reservation.SpaceId;
 import org.springframework.boot.autoconfigure.gson.GsonProperties;
-import org.springframework.http.converter.json.GsonBuilderUtils;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@Component
 public class ExternalSystemHttpAdapter {
     private static final String BASE_URI = "localhost:8080";
+    private static final ExternalSystemHttpAdapter instance = new ExternalSystemHttpAdapter();
 
-    private static ExternalSystemHttpAdapter instance = new ExternalSystemHttpAdapter();
-    
-    public static final ExternalSystemHttpAdapter instance() {
+    public static ExternalSystemHttpAdapter instance() {
         return instance;
     }
-    
+
     public ExternalSystemHttpAdapter() {
 
     }
 
+    public UUID makeReservation(SpaceId spaceId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        final String reservationUri = BASE_URI + String.format("/space/%s/reserve", spaceId.getId());
+        final String jsonBody = String.format("{startDateTime:%s, endDateTime:%s}", startDateTime, endDateTime);
 
-    public UUID makeReservation(UUID spaceId, LocalDateTime startDateTime, LocalDateTime endDateTime) throws IOException {
-        final String reservationUri = BASE_URI + String.format("/space/%s/reserve", spaceId);
-        URL url = new URL(reservationUri);
+        RestTemplate restTemplate = new RestTemplate();
+        ParameterizedTypeReference<HashMap<String, String>> responseType = new ParameterizedTypeReference<>() {};
+        RequestEntity<Void> request = RequestEntity.post(reservationUri, jsonBody)
+                .accept(MediaType.APPLICATION_JSON)
+                .build();
+        Map<String, String> jsonResponse = restTemplate.exchange(request, responseType).getBody();
 
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setDoOutput(true);
-        con.setRequestMethod("POST");
-        OutputStream outStream = con.getOutputStream();
-        OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream, "UTF-8");
-        outStreamWriter.write(String.format("{startDateTime:%s, endDateTime:%s}", startDateTime, endDateTime));
-        outStreamWriter.flush();
-        outStreamWriter.close();
-        outStream.close();
-        con.connect();
-
-        String result;
-        BufferedInputStream bis = new BufferedInputStream(con.getInputStream());
-        ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        int result2 = bis.read();
-        while(result2 != -1) {
-            buf.write((byte) result2);
-            result2 = bis.read();
-        }
-        result = buf.toString();
-        System.out.println(result);
-
-
-
-        return UUID.randomUUID();
+        return UUID.fromString(jsonResponse.get("reservationId"));
     }
 }

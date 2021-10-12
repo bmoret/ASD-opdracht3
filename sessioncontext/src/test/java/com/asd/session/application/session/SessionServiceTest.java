@@ -1,4 +1,4 @@
-package main.java.com.asd.session.application.session;
+package java.com.asd.session.application.session;
 
 import main.java.com.asd.session.domain.model.person.PersonId;
 import main.java.com.asd.session.domain.model.session.Session;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SessionServiceTest {
     @Autowired
-    private SessionService sessionService;
+    private main.java.com.asd.session.application.session.SessionService sessionService;
     private SessionId sessionId;
     private Session session;
 

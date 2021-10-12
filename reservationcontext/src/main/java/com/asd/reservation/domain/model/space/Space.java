@@ -3,6 +3,7 @@ package main.java.com.asd.reservation.domain.model.space;
 import main.java.com.asd.reservation.domain.model.building.BuildingId;
 import main.java.com.asd.reservation.domain.model.facility.Facility;
 import java.util.List;
+import java.util.UUID;
 
 public class Space {
 
@@ -17,7 +18,7 @@ public class Space {
 
 
     public Space(String spaceName, RoomLocation roomLocation, Size size, PersonCapacity personCapacity, BuildingId buildingId, List<Facility> facilities) {
-        this.spaceId = new SpaceId();
+        this.spaceId = new SpaceId(UUID.randomUUID());
         this.spaceName = spaceName;
         this.roomLocation = roomLocation;
         this.size = size;
@@ -33,4 +34,4 @@ public class Space {
         return buildingId;
     }
 }
-}
+

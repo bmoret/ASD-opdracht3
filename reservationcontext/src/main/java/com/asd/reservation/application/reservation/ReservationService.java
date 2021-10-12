@@ -39,13 +39,13 @@ public class ReservationService {
         return reservationsByBuilding;
     }
     
-    public List<Reservation> getReservationsBySpace(SpaceId spaceId) {
-        return reservationRepository.findBySpace(spaceId);
+    public List<Reservation> getReservationsBySpace(Space space) {
+        return reservationRepository.findAll().stream().filter(reservation -> reservation.getSpace().equals(space)).toList();
     }
 
     public Boolean changeReservationDateTime(UUID id, String startDateTime, String endDateTime) throws NotFoundException {
         Reservation reservation = getReservationById(id);
-        List<Reservation> reservations = getReservationsBySpace(reservation.getSpace().getId());
+        List<Reservation> reservations = getReservationsBySpace(reservation.getSpace());
 
         Boolean changed = reservation.changeDateTime(new TimeSpan(LocalDateTime.parse(startDateTime), LocalDateTime.parse(endDateTime)), reservations);
         reservationRepository.save(reservation);

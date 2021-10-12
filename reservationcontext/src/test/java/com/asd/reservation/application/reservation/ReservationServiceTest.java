@@ -2,6 +2,7 @@ package test.java.com.asd.reservation.application.reservation;
 
 import javassist.NotFoundException;
 import main.java.com.asd.reservation.application.reservation.ReservationService;
+import main.java.com.asd.reservation.domain.model.space.Space;
 import main.java.com.asd.reservation.repository.ReservationRepository;
 import main.java.com.asd.reservation.domain.model.space.SpaceId;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
@@ -22,8 +23,8 @@ class ReservationServiceTest {
     final ReservationRepository reservationRepository = Mockito.mock(ReservationRepository.class);
     final ReservationService reservationService = new ReservationService(reservationRepository);
 
-    private SpaceId spaceId1;
-    private SpaceId spaceId2;
+    private Space space1;
+    private Space space2;
     private ReservationId reservationId;
     private Reservation reservation1Room1;
     private Reservation reservation2Room1;
@@ -31,19 +32,20 @@ class ReservationServiceTest {
 
     @BeforeEach
     void beforeEach() {
-        spaceId1 = new SpaceId(UUID.randomUUID());
-        spaceId2 = new SpaceId(UUID.randomUUID());
+
+        space1 = new Space(null,null,null,null,null,null);
+        space2 = new Space(null,null,null,null,null,null);
 
         reservationId = new ReservationId(UUID.randomUUID());
 
-        reservation1Room1 = new Reservation(reservationId, null, null, spaceId1, null);
-        reservation2Room1 = new Reservation(null, null, null, spaceId1, null);
-        reservation3Room2 = new Reservation(null, null, null, spaceId2, null);
+        reservation1Room1 = new Reservation(reservationId, null, null, space1, null);
+        reservation2Room1 = new Reservation(null, null, null, space1, null);
+        reservation3Room2 = new Reservation(null, null, null, space2, null);
     }
 
     @Test
     void testFindsAllReservationsInSpace() {
-        List<Reservation> reservationsSpace1 = reservationService.getReservationsBySpace(spaceId1);
+        List<Reservation> reservationsSpace1 = reservationService.getReservationsBySpace(space1);
         assertEquals(2,reservationsSpace1.size());
         assertEquals(spaceId1,reservationsSpace1.get(0).getSpace().getId());
         assertEquals(spaceId1,reservationsSpace1.get(1).getSpace().getId());

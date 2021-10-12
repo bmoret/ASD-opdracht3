@@ -14,4 +14,8 @@ public class BuildingId implements Serializable {
     public BuildingId() {
         this.id = UUID.randomUUID();
     }
+
+    public UUID getId() {
+        return id;
+    }
 }

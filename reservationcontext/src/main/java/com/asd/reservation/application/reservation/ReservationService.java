@@ -22,7 +22,20 @@ public class ReservationService {
         return reservationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("There is no Reservation with id: "+id));
     }
-
+    
+    public List<Reservation> getReservationsByBuilding(UUID buildingId) throws NotFoundException {
+        List<Reservation> reservations = reservationRepository.findAll(id);
+        List<Reservation> reservationsByBuilding = new List<Reservation>();
+        for(Reservation reservation : reservations){
+            Space space = Reservation.getSpace();
+            UUID buildingIdReservation = space.getBuildingId();
+            if(buildingId == buildingIdReservation){
+                reservationsByBuilding.add(reservation);
+            }
+        }
+        return reservationsByBuilding;
+    }
+    
     public List<Reservation> getReservationsBySpace(SpaceId spaceId) {
         return reservationRepository.findBySpace(spaceId);
     }

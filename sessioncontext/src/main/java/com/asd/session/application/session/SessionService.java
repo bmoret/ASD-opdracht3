@@ -5,10 +5,6 @@ import main.java.com.asd.session.domain.model.person.PersonId;
 import main.java.com.asd.session.domain.model.session.Session;
 import main.java.com.asd.session.domain.model.session.SessionRepository;
 import main.java.com.asd.session.application.person.PersonService;
-import org.springframework.stereotype.Component;
-import main.java.com.asd.session.domain.model.reservation.SpaceId;
-import main.java.com.asd.session.domain.model.session.Session;
-import main.java.com.asd.session.domain.model.session.SessionRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,11 +21,6 @@ public class SessionService {
     public SessionService(SessionRepository sessionRepository, PersonService personService) {
         this.sessionRepository = sessionRepository;
         this.personService = personService;
-    }
-
-    public void reserveSpaceForSession(SpaceReservationCommand spaceReservationCommand) {
-        Session session = sessionRepository.getById(spaceReservationCommand.getSessionId());
-        session.reserveSpace(new SpaceId(spaceReservationCommand.getSpaceId()));
     }
 
     //haalt alle sessies op

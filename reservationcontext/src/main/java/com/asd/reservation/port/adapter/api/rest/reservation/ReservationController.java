@@ -11,7 +11,12 @@ public class ReservationController {
     public ReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
-
+    
+    @GetMapping(path = "/{buildingId}")
+    public Boolean getReservationsByBuilding(@PathVariable buildingId buildingID) throws NotFoundException {
+        return reservationService.getReservationsByBuilding(buildingID);
+    }
+    
     @PutMapping(path = "/{id}/changeDateTime")
     public Boolean changeReservationDateTime(@PathVariable UUID id, @RequestBody ReservationRequest rr) throws NotFoundException {
 

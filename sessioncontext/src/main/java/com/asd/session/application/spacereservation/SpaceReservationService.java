@@ -4,6 +4,7 @@ import main.java.com.asd.session.domain.model.session.Session;
 import main.java.com.asd.session.domain.model.session.SessionRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -14,8 +15,7 @@ public class SpaceReservationService {
     public SpaceReservationService(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
     }
-
-    public void reserveSpaceForSession(UUID sessionId, UUID spaceId) {
+    public void reserveSpaceForSession(UUID sessionId, UUID spaceId) throws IOException {
         Session session = sessionRepository.getById(sessionId);
         session.reserveSpace(spaceId);
     }

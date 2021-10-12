@@ -1,7 +1,10 @@
 package main.java.com.asd.reservation.port.adapter.api.rest.reservation;
 import javassist.NotFoundException;
 import main.java.com.asd.reservation.application.reservation.ReservationService;
+import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -13,7 +16,7 @@ public class ReservationController {
     }
     
     @GetMapping(path = "/{buildingId}")
-    public Boolean getReservationsByBuilding(@PathVariable buildingId buildingID) throws NotFoundException {
+    public List<Reservation> getReservationsByBuilding(@PathVariable UUID buildingID) throws NotFoundException {
         return reservationService.getReservationsByBuilding(buildingID);
     }
     

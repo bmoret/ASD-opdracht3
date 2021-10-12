@@ -40,7 +40,7 @@ public class ReservationService {
     }
     
     public List<Reservation> getReservationsBySpace(Space space) {
-        return reservationRepository.findAll().stream().filter(reservation -> reservation.getSpace().equals(space)).toList();
+        return reservationRepository.findAll().stream().filter(reservation -> reservation.getSpace().equals(space)).collect(Collectors.toList());
     }
 
     public Boolean changeReservationDateTime(UUID id, String startDateTime, String endDateTime) throws NotFoundException {

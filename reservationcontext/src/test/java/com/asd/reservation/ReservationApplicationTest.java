@@ -1,24 +1,39 @@
+package test.java.com.asd.reservation;
+
+import javassist.NotFoundException;
+import main.java.com.asd.reservation.domain.model.account.AccountId;
 import main.java.com.asd.reservation.domain.model.building.BuildingId;
-import main.java.com.asd.reservation.domain.model.reservation.ReservationStatus;
+import main.java.com.asd.reservation.domain.model.reservation.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import main.java.com.asd.reservation.domain.model.reservation.Reservation;
+import main.java.com.asd.reservation.application.reservation.ReservationService;
+import main.java.com.asd.reservation.application.space.SpaceService;
 import main.java.com.asd.reservation.domain.model.building.Address;
 import main.java.com.asd.reservation.domain.model.building.Building;
-import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
+import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.space.PersonCapacity;
 import main.java.com.asd.reservation.domain.model.space.RoomLocation;
 import main.java.com.asd.reservation.domain.model.space.Size;
 import main.java.com.asd.reservation.domain.model.space.Space;
+import main.java.com.asd.reservation.repository.ReservationRepository;
+import main.java.com.asd.reservation.repository.SpaceRepository;
+import org.mockito.Mockito;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class ReservationApplicationTest {
-   private BuildingId buildingId;
-   private UUID reservationId;
+    private Building building;
+    private Building wrongbuilding;
+    private Reservation reservation;
+    final ReservationRepository reservationRepository = Mockito.mock(ReservationRepository.class);
+    final ReservationService reservationService = new ReservationService(reservationRepository);
+
+    private ReservationId reservationId;
     @Before
     public void setUp(){
         RoomLocation location = new RoomLocation("Room1", 1);
@@ -26,10 +41,11 @@ public class ReservationApplicationTest {
         Size size = new Size(50, 50);
         Address address = new Address("straat", "1", "1234AB", "Stad");
         Building building1 = new Building("Gebouw1", address);
-        Building building2 = new Building("Gebouw1", address);
-        Building building3 = new Building("Gebouw1", address);
+        Building building2 = new Building("Gebouw2", address);
+        Building building3 = new Building("Gebouw3", address);
+        wrongbuilding = new Building("Gebouw4", address);
 
-        buildingId = building1.getId();
+        building = building1;
         Space space1 = new Space(
                 "New Space",
                 location,
@@ -54,27 +70,29 @@ public class ReservationApplicationTest {
                 building3.getId(),
                 new ArrayList<>()
         );
-        ReservationStatus reservationStatus = ReservationStatus.RESERVED;
         TimeSpan timeSpan = new TimeSpan(LocalDateTime.now(), LocalDateTime.now());
-        Reservation reservation1 = new Reservation(reservationStatus, timeSpan, space1, 1);
-        Reservation reservation2 = new Reservation(reservationStatus, timeSpan, space2, 1);
-        Reservation reservation3 = new Reservation(reservationStatus, timeSpan, space3, 1);
+        Reservation reservation1 = new Reservation(new ReservationId(UUID.randomUUID()), null, timeSpan, space1, new AccountId(UUID.randomUUID()));
+        Reservation reservation2 = new Reservation(new ReservationId(UUID.randomUUID()),null, timeSpan, space2, new AccountId(UUID.randomUUID()));
+        Reservation reservation3 = new Reservation(new ReservationId(UUID.randomUUID()),null, timeSpan, space3, new AccountId(UUID.randomUUID()));
+        reservationRepository.save(reservation1);
+        reservationRepository.save(reservation2);
+        reservationRepository.save(reservation3);
 
-        reservationId = reservation1.getId();
+        reservation = reservation1;
     }
 
     @Test
-    public void testgetReservationByBuildingCorrectSize() {
-        Assert.assertEquals(reservationService.getReservationsByBuilding(buildingId).size(), 1);
+    public void testgetReservationByBuildingCorrectSize() throws NotFoundException {
+        Assert.assertEquals(reservationService.getReservationsByBuilding(building.getId().id).size(), 1);
     }
 
     @Test
-    public void testgetReservationByBuildingCorrectBuilding() {
-        Assert.assertNotEquals(reservationService.getReservationsByBuilding(1)[0].getId(), reservationId);
+    public void testgetReservationByBuildingCorrectBuilding() throws NotFoundException {
+        Assert.assertNotEquals(reservationService.getReservationsByBuilding(building.getId().id).get(0).getReservationId(), reservation.getReservationId());
     }
 
     @Test
-    public void testgetReservationByBuildingNotExist() {
-        Assert.assertEquals(reservationService.getReservationsByBuilding(new UUID(5)), new List<Reservation>());
+    public void testgetReservationByBuildingNotExist() throws NotFoundException {
+        Assert.assertTrue(reservationService.getReservationsByBuilding(wrongbuilding.getId().id).isEmpty());
     }
 }

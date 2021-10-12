@@ -2,17 +2,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
-import main.java.com.asd.reservation.application.space.SpaceService;
 import main.java.com.asd.reservation.domain.model.building.Address;
 import main.java.com.asd.reservation.domain.model.building.Building;
-import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
 import main.java.com.asd.reservation.domain.model.space.PersonCapacity;
 import main.java.com.asd.reservation.domain.model.space.RoomLocation;
 import main.java.com.asd.reservation.domain.model.space.Size;
 import main.java.com.asd.reservation.domain.model.space.Space;
-import main.java.com.asd.reservation.repository.ReservationRepository;
-import main.java.com.asd.reservation.repository.SpaceRepository;
 
 public class ReservationApplicationTest {
    private UUID buildingId;

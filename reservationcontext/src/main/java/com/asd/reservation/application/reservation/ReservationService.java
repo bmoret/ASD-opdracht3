@@ -3,12 +3,15 @@ package main.java.com.asd.reservation.application.reservation;
 import javassist.NotFoundException;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
 import main.java.com.asd.reservation.domain.model.reservation.TimeSpan;
+import main.java.com.asd.reservation.domain.model.space.Space;
 import main.java.com.asd.reservation.domain.model.space.SpaceId;
 import main.java.com.asd.reservation.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -24,11 +27,11 @@ public class ReservationService {
     }
     
     public List<Reservation> getReservationsByBuilding(UUID buildingId) throws NotFoundException {
-        List<Reservation> reservations = reservationRepository.findAll(id);
-        List<Reservation> reservationsByBuilding = new List<Reservation>();
+        List<Reservation> reservations = reservationRepository.findAll();
+        List<Reservation> reservationsByBuilding = new ArrayList<>();
         for(Reservation reservation : reservations){
-            Space space = Reservation.getSpace();
-            UUID buildingIdReservation = space.getBuildingId();
+            Space space = reservation.getSpace();
+            UUID buildingIdReservation = space.getBuildingId().id;
             if(buildingId == buildingIdReservation){
                 reservationsByBuilding.add(reservation);
             }
@@ -42,7 +45,7 @@ public class ReservationService {
 
     public Boolean changeReservationDateTime(UUID id, String startDateTime, String endDateTime) throws NotFoundException {
         Reservation reservation = getReservationById(id);
-        List<Reservation> reservations = getReservationsBySpace(reservation.getSpaceId());
+        List<Reservation> reservations = getReservationsBySpace(reservation.getSpace().getId());
 
         Boolean changed = reservation.changeDateTime(new TimeSpan(LocalDateTime.parse(startDateTime), LocalDateTime.parse(endDateTime)), reservations);
         reservationRepository.save(reservation);
@@ -54,6 +57,6 @@ public class ReservationService {
     }
 
     public List<Reservation> findBySpace(SpaceId id) {
-        return allReservations().stream().filter(reservation -> reservation.getSpaceId() == id).toList();
+        return allReservations().stream().filter(reservation -> reservation.getSpace().getId() == id).collect(Collectors.toList());
     }
 }

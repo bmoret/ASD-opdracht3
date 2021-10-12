@@ -1,4 +1,4 @@
-package com.asd.session.domain.model.session;
+package test.java.com.asd.session.session;
 
 import main.java.com.asd.session.application.person.PersonService;
 import main.java.com.asd.session.application.session.SessionService;
@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class SessionTest {
+public class SessionTest {
     private static final PersonRepository personRepository = mock(PersonRepository.class);
 
     private static final SessionRepository sessionRepository = mock(SessionRepository.class);

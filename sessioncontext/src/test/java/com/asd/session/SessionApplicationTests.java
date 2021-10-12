@@ -1,4 +1,4 @@
-package com.asd.opdracht3;
+package test.java.com.asd.session;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

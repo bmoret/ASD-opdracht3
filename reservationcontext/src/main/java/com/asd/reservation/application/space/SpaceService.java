@@ -1,6 +1,5 @@
 package main.java.com.asd.reservation.application.space;
 
-import main.java.com.asd.reservation.application.reservation.ReservationService;
 import main.java.com.asd.reservation.domain.model.building.BuildingId;
 import main.java.com.asd.reservation.domain.model.facility.Facility;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;

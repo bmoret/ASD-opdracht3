@@ -1,10 +1,10 @@
 package main.java.com.asd.reservation.domain.model.reservation;
 
 import main.java.com.asd.reservation.domain.model.account.AccountId;
+import main.java.com.asd.reservation.domain.model.space.Space;
 import main.java.com.asd.reservation.domain.model.space.SpaceId;
 import main.java.com.asd.reservation.domain.model.space.Space;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Reservation {

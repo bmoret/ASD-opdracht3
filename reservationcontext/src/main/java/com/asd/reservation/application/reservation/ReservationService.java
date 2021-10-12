@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -26,11 +27,11 @@ public class ReservationService {
     }
     
     public List<Reservation> getReservationsByBuilding(UUID buildingId) throws NotFoundException {
-        List<Reservation> reservations = reservationRepository.findAll(id);
+        List<Reservation> reservations = reservationRepository.findAll();
         List<Reservation> reservationsByBuilding = new ArrayList<>();
         for(Reservation reservation : reservations){
             Space space = reservation.getSpace();
-            UUID buildingIdReservation = space.getBuildingId();
+            UUID buildingIdReservation = space.getBuildingId().id;
             if(buildingId == buildingIdReservation){
                 reservationsByBuilding.add(reservation);
             }
@@ -56,6 +57,6 @@ public class ReservationService {
     }
 
     public List<Reservation> findBySpace(SpaceId id) {
-        return allReservations().stream().filter(reservation -> reservation.getSpaceId() == id).toList();
+        return allReservations().stream().filter(reservation -> reservation.getSpace().getId() == id).collect(Collectors.toList());
     }
 }

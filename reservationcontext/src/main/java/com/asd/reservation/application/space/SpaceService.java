@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -51,10 +52,10 @@ public class SpaceService {
         return spaceRepository.findAll();
     }
 
-    public Stream<Space> getAvailableSpacesForDate(TimeSpan timeSpan) {
+    public List<Space> getAvailableSpacesForDate(TimeSpan timeSpan) {
         return getSpaces().stream().filter(space -> {
             List<Reservation> reservations = reservationService.findBySpace(space.getId());
             return (reservations.stream().noneMatch(reservation -> reservation.timeSpanHasOverlap(timeSpan)));
-        });
+        }).collect(Collectors.toList());
     }
 }

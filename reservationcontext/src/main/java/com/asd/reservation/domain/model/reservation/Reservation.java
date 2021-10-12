@@ -15,7 +15,6 @@ public class Reservation {
     private AccountId accountId;
 
     public Reservation(ReservationId reservationId, ReservationStatus reservationStatus, TimeSpan timeSpan, Space space, AccountId accountId) {
-        this.reservationId = reservationId;
         this.reservationStatus = reservationStatus;
         this.timeSpan = timeSpan;
         this.space = space;

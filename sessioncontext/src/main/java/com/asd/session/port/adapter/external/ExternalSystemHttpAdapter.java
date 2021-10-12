@@ -1,15 +1,10 @@
 package main.java.com.asd.session.port.adapter.external;
 
 
-import org.springframework.boot.autoconfigure.gson.GsonProperties;
-import org.springframework.http.converter.json.GsonBuilderUtils;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 public class ExternalSystemHttpAdapter {

@@ -1,14 +1,12 @@
-package test.java.com.asd.reservation;
+package test.java.com.asd.reservation.application.reservation;
 
 import javassist.NotFoundException;
 import main.java.com.asd.reservation.domain.model.account.AccountId;
-import main.java.com.asd.reservation.domain.model.building.BuildingId;
 import main.java.com.asd.reservation.domain.model.reservation.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import main.java.com.asd.reservation.application.reservation.ReservationService;
-import main.java.com.asd.reservation.application.space.SpaceService;
 import main.java.com.asd.reservation.domain.model.building.Address;
 import main.java.com.asd.reservation.domain.model.building.Building;
 import main.java.com.asd.reservation.domain.model.reservation.Reservation;
@@ -17,13 +15,10 @@ import main.java.com.asd.reservation.domain.model.space.RoomLocation;
 import main.java.com.asd.reservation.domain.model.space.Size;
 import main.java.com.asd.reservation.domain.model.space.Space;
 import main.java.com.asd.reservation.repository.ReservationRepository;
-import main.java.com.asd.reservation.repository.SpaceRepository;
 import org.mockito.Mockito;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class ReservationApplicationTest {

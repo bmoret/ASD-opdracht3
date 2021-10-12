@@ -1,4 +1,4 @@
-package test.java.com.asd.reservation;
+package test.java.com.asd.reservation.application.space;
 
 import main.java.com.asd.reservation.application.reservation.ReservationService;
 import main.java.com.asd.reservation.application.space.SpaceService;

@@ -5,7 +5,6 @@ import main.java.com.asd.session.domain.model.person.PersonId;
 import main.java.com.asd.session.domain.model.session.Session;
 import main.java.com.asd.session.domain.model.session.SessionRepository;
 import main.java.com.asd.session.application.person.PersonService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

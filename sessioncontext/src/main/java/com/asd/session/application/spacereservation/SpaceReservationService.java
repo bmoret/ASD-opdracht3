@@ -5,7 +5,6 @@ import main.java.com.asd.session.domain.model.session.SessionRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service

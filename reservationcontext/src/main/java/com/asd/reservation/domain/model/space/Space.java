@@ -29,4 +29,8 @@ public class Space {
     public SpaceId getId() {
         return spaceId;
     }
+    public BuildingId getBuildingId() {
+        return buildingId;
+    }
+}
 }

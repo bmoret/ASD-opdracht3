@@ -11,4 +11,8 @@ public class SpaceId implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public UUID id;
+
+    public SpaceId(UUID id) {
+        this.id = id;
+    }
 }
